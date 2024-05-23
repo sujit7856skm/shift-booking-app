@@ -1,35 +1,32 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-import React from 'react';
+import React from "react";
 import {
   SafeAreaView,
   StatusBar,
   StyleSheet,
   useColorScheme,
-} from 'react-native';
+} from "react-native";
 
-import {
-  Colors,
-} from 'react-native/Libraries/NewAppScreen';
+import AppNavigater from "./src/appConfig/navigation/AppNavigater";
+import { Provider } from "react-redux";
+import { store } from "./src/appConfig/redux";
 
 function App() {
-  const isDarkMode = useColorScheme() === 'dark';
+  const isDarkMode = useColorScheme() === "dark";
 
   const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    backgroundColor: "#F7F8FB",
+    flex: 1,
   };
 
   return (
     <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
+      <Provider store={store}>
+        <StatusBar
+          barStyle={isDarkMode ? "light-content" : "dark-content"}
+          backgroundColor={backgroundStyle.backgroundColor}
+        />
+        <AppNavigater />
+      </Provider>
     </SafeAreaView>
   );
 }
@@ -41,15 +38,15 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 24,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   sectionDescription: {
     marginTop: 8,
     fontSize: 18,
-    fontWeight: '400',
+    fontWeight: "400",
   },
   highlight: {
-    fontWeight: '700',
+    fontWeight: "700",
   },
 });
 
