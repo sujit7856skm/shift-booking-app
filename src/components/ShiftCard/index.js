@@ -8,13 +8,18 @@ import { useUpdateShiftMutation } from "../../sevices/api";
 export default function ShiftCard({ shift, isMyShift = false }) {
   const [updateShift, { isSuccess, isLoading, error }] =
     useUpdateShiftMutation();
+
+  const isPassed = useMemo(() => {
+    return new Date(shift?.startTime) < new Date();
+  }, [shift]);
+
   const isBooked = useMemo(() => {
     return shift?.booked;
   }, [shift?.booked]);
 
   const btnColor = useMemo(() => {
-    return isBooked ? "#E2006A" : "#16A64D";
-  }, [isBooked]);
+    return isPassed ? "#CBD2E1" : isBooked ? "#E2006A" : "#16A64D";
+  }, [isBooked, isPassed]);
 
   const btnLabel = useMemo(() => {
     return isLoading ? "Loading" : isBooked ? "Cancel" : "Book";
@@ -35,6 +40,7 @@ export default function ShiftCard({ shift, isMyShift = false }) {
         <CustomText label={shift?.area} />
       </View>
       <CustomButton
+        disabled={isPassed}
         label={btnLabel}
         color={btnColor}
         loading={isLoading}

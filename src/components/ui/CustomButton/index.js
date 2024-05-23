@@ -8,10 +8,12 @@ export default function CustomButton({
   color = "#CBD2E1",
   loading = false,
   redLoader = false,
+  disabled = false,
   onPress = () => {},
 }) {
   return (
     <TouchableOpacity
+      disabled={disabled}
       style={[styles.btn, { borderColor: color }]}
       onPress={onPress}
     >
