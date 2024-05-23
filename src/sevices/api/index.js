@@ -15,6 +15,7 @@ export const api = createApi({
     shift: builder?.query({
       query: (shiftId) => ({ url: `shifts/${shiftId}`, method: "GET" }),
     }),
+    //I have modified the mock api method from POST to GET, Since the POST API was not working for me
     updateShift: builder.mutation({
       query: (shift) => ({
         url: `shifts/${shift?.id}/${shift?.booked ? "book" : "cancel"}`,
